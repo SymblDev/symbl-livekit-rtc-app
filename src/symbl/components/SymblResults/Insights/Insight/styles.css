@@ -1,0 +1,58 @@
+.insight-container-sender {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.insight-container-receiver {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+}
+
+.insight-data-container-sender {
+    border-radius: 20px 20px 20px 20px;
+    margin: 10px;
+    padding: 5px 20px;
+    min-height: 60px;
+    width: 72%;
+    color: black;
+    background: linear-gradient(to left, #b9f6c0, #9df191, #98e88e);
+}
+
+.insight-data-container-receiver {
+    border-radius: 20px 20px 20px 20px;
+    margin: 10px;
+    padding: 5px 20px;
+    min-height: 60px;
+    width: 72%;
+    color: black;
+    background: linear-gradient(to left, #81cde3, #a5e1f1, #bde5e3);
+}
+
+.insight-top-container {
+    display: flex;
+    justify-content: center;
+}
+
+.insight-assignee {
+    font-style: italic;
+}
+
+.insight-text {
+    font-size: 16px;
+}
+
+.insight-bottom-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.insight-timestamp {
+    font-style: italic;
+}
+
+.insight-type {
+    font-weight: bold;
+}

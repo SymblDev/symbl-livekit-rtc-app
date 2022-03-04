@@ -1,0 +1,44 @@
+.down-arrow-container {
+    z-index: 1000;
+    bottom: 4%;
+    position: absolute;
+    right: 5%;
+}
+
+.down-arrow-container:hover {
+    cursor: pointer;
+}
+
+.ball1 {
+    background: #ffffff;
+    height: 8px;
+    width: 8px;
+    border-radius: 100%;
+}
+
+.ball2 {
+    background: #ffffff;
+    height: 6px;
+    width: 6px;
+    border-radius: 100%;
+}
+
+.ball3 {
+    background: #ffffff;
+    height: 4px;
+    width: 4px;
+    border-radius: 100%;
+}
+
+.spacer {
+    height: 5px;
+}
+
+.arrow {
+    height: 20px;
+    width: 20px;
+    border: 0;
+    border-right: 4px solid #ffffff;
+    border-top: 4px solid #ffffff;
+    transform: translateY(-10px) rotate(135deg);
+}

@@ -1,0 +1,51 @@
+.transcript-container-sender {
+    display: flex;
+    flex-direction: row;
+}
+
+.transcript-container-receiver {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.transcript-data-container-sender {
+    border-radius: 0 20px 20px 10px;
+    margin: 10px;
+    padding: 5px 20px;
+    min-height: 60px;
+    width: 60%;
+    color: black;
+    background: #c8f5f0;
+}
+
+.transcript-data-container-receiver {
+    border-radius: 20px 0 10px 20px;
+    margin: 10px;
+    padding: 5px 20px;
+    min-height: 60px;
+    width: 60%;
+    color: black;
+    background: #ffffff;
+}
+
+.transcript-top-container {
+    display: flex;
+    justify-content: center;
+}
+
+.transcript-user {
+    font-weight: bold;
+}
+
+.transcript-text {
+    font-size: 16px;
+}
+
+.transcript-bottom-container {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.transcript-timestamp {
+    font-style: italic;
+}

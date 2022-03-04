@@ -1,0 +1,22 @@
+.sentiment-analysis-data {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.sentiment-analysis-calculated-data {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.sentiment-positive {
+    color: lightgreen;
+}
+
+.sentiment-negative {
+    color: #e8677b;
+}
+
+.sentiment-neutral {
+    color: dodgerblue;
+}

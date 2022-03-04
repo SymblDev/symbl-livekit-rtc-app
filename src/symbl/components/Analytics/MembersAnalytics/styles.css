@@ -1,0 +1,56 @@
+progress {
+    width: 100%;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+progress::-webkit-progress-bar {
+    background-color: yellow;
+    border-radius: 7px;
+}
+
+progress::-webkit-progress-value {
+    background-color: blue;
+    border-radius: 7px;
+    box-shadow: 1px 1px 5px 3px rgba(255, 0, 0, 0.8);
+}
+
+progress::-moz-progress-bar {
+    /* style rules */
+}
+
+li {
+    font-size: 20px;
+}
+
+li span {
+    font-size: 12px;
+}
+
+.members-analytics-container {
+    min-width: 500px;
+}
+
+.members-analytics-data {
+    overflow: auto;
+    max-height: 400px;
+    padding-right: 50px;
+}
+
+.members-analytics-data::-webkit-scrollbar {
+    width: 0.8em;
+    border-radius: 100vw;
+}
+
+.members-analytics-data::-webkit-scrollbar-track {
+    background: black;
+    border-radius: 100vw;
+}
+
+.members-analytics-data::-webkit-scrollbar-thumb {
+    background: #645b5b;
+    border-radius: 100vw;
+}
+
+.members-analytics-data::-webkit-scrollbar-thumb:hover {
+    background: #9a9090;
+}

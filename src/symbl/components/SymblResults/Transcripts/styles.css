@@ -1,0 +1,27 @@
+.transcripts-data-container {
+    overflow: auto;
+    padding: 0 10px;
+    border: 1px solid white;
+    margin: 0 20px;
+    min-height: 86vh;
+    max-height: 86vh;
+}
+
+.transcripts-data-container::-webkit-scrollbar {
+    width: 0.8em;
+    border-radius: 100vw;
+}
+
+.transcripts-data-container::-webkit-scrollbar-track {
+    background: black;
+    border-radius: 100vw;
+}
+
+.transcripts-data-container::-webkit-scrollbar-thumb {
+    background: #645b5b;
+    border-radius: 100vw;
+}
+
+.transcripts-data-container::-webkit-scrollbar-thumb:hover {
+    background: #9a9090;
+}

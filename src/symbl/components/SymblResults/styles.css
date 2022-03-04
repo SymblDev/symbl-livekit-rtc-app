@@ -1,0 +1,26 @@
+.symbl-results-container {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    min-height: 100vh;
+}
+
+.symbl-results-transcripts-grid {
+}
+
+.symbl-results-insights-topics-grid {
+    display: grid;
+    flex-direction: row;
+    grid-auto-rows: 1fr;
+}
+
+.symbl-results-insights-grid {
+}
+
+.symbl-results-topics-grid {
+
+}
+
+.symbl-results-trackers-grid {
+
+}
