@@ -3,7 +3,7 @@ const {getMessagesWithSentiments} = require("../apis/getMessagesWithSentiments")
 const {getAnalyticsMetric} = require("../apis/getAnalyticsMetric");
 const {Logger} = require('../utils/Logger');
 
-class SymblService {
+export default class SymblService {
 
     STARTING = "starting";
     STARTED = "started";
@@ -314,5 +314,3 @@ class SymblService {
         }
     }
 }
-
-module.exports = SymblService;
