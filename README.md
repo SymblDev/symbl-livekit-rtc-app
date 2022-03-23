@@ -55,75 +55,76 @@ This extension provides the following out-of-the-box conversational intelligence
 
 1. Clone the project
 
-```bash
-  git clone https://github.com/SymblDev/symbl-livekit-rtc-app.git
-```
+    ```bash
+    git clone https://github.com/SymblDev/symbl-livekit-rtc-app.git
+    ```
 
 2. Go to the project directory
 
-```bash
-  cd symbl-livekit-rtc-app
-```
+    ```bash
+    cd symbl-livekit-rtc-app
+    ```
 
 3. Install dependencies
 
-```bash
-  npm install
-```
+    ```bash
+    npm install
+    ```
 
 ### Run Locally
 1. Navigate to the `src/symbl/config/` directory and open the `config.js` file.
 2. Add your Symbl `App Id` and `App Secret` values in the respective fields below:
 
-```javascript
-  appId: '',
-  appSecret: ''
-```
+    ```javascript
+   appId: '',
+   appSecret: ''
+   ```
 
 3. Modify the rest of the configuration such as Trackers, Sentiment Analytics as per requirements. [Optional]
-```javascript
-  realtimeSentimentAnalysis: true,
-  realtimeAnalyticsMetric: true,
-  trackers: [
-    {
-      name: 'Enable All Trackers',
-      vocabulary: [
-        "be careful",
-        "bankers expected hiring",
-        "discussion",
-        "separate system",
-        "old shop"
-      ],
-    }
-  ]
-```
+
+    ```javascript
+    realtimeSentimentAnalysis: true,
+    realtimeAnalyticsMetric: true,
+    trackers: [
+      {
+        name: 'Enable All Trackers',
+        vocabulary: [
+          "be careful",
+          "bankers expected hiring",
+          "discussion",
+          "separate system",
+          "old shop"
+        ],
+      }
+    ]
+    ```
 
 4. Start the application.
-```npm
-npm start
-```
+    ```npm
+    npm start
+    ```
 The application will be started at [http://localhost:3000](http://localhost:3000)
 
 ## Usage
 1. Navigate to [http://localhost:3000](http://localhost:3000)
 
 2. Enter the LiveKit URL
-> If the LiveKit server is not running at the localhost, we can utilize the LiveKit's playground server URL.
-> ```text
->    wss://demo.livekit.cloud
-> ```
+    > If the LiveKit server is not running at the localhost, we can utilize the LiveKit's playground server URL.
+    > ```text
+    >    wss://demo.livekit.cloud
+    > ```
 
 3. Enter the `Token` generated using the LivekKit's Server.
-> If the LiveKit server is not running at the localhost, we can utilize the LiveKit's playground server URL to generate token.
-> ```
->    curl --location --request POST 'https://livekit.io/api/playground/tokens' \
->    --header 'authority: livekit.io' \
->    --header 'Content-Type: text/plain;charset=UTF-8' \
->    --data-raw '{
->        "roomName": "tower",
->        "userName": "Stark"
->    }'
-> ```
+    > If the LiveKit server is not running at the localhost, we can utilize the LiveKit's playground server URL to generate token.
+    > ```
+    >    curl --location --request POST 'https://livekit.io/api/playground/tokens' \
+    >    --header 'authority: livekit.io' \
+    >    --header 'Content-Type: text/plain;charset=UTF-8' \
+    >    --data-raw '{
+    >        "roomName": "tower",
+    >        "userName": "Stark"
+    >    }'
+    > ```
 
 4. Click on `Connect` to enter the Room.
 
@@ -134,19 +135,19 @@ The application will be started at [http://localhost:3000](http://localhost:3000
 ## Screenshots
 
 - Live Closed Captioning
->  ![Live Closed Captioning](screenshots/Live_Closed_Captioning.png)
+  >  ![Live Closed Captioning](screenshots/Live_Closed_Captioning.png)
 
 - Real-time Transcripts, Insights (Action Items, Questions and Follow Ups), Topics and Trackers 
->  ![Real-time_Transcripts_Insights_Topics_Trackers](screenshots/Real-time_Transcripts_Insights_Topics_Trackers.png)
+  >  ![Real-time_Transcripts_Insights_Topics_Trackers](screenshots/Real-time_Transcripts_Insights_Topics_Trackers.png)
 
 - Real-time Topics with sentiments
->  ![Real-time_Topics_With_Sentiments](screenshots/Real-time_Topics_With_Sentiments.png)
+  >  ![Real-time_Topics_With_Sentiments](screenshots/Real-time_Topics_With_Sentiments.png)
 
 - Sentiment and Meeting Analytics
->  ![Sentiment_And_Meeting_Analytics](screenshots/Sentiment_And_Meeting_Analytics.png)
+  >  ![Sentiment_And_Meeting_Analytics](screenshots/Sentiment_And_Meeting_Analytics.png)
 
 - Sentiment Analysis with overall sentiment
->  ![Sentiment_Analysis_With_Overall_Sentiment](screenshots/Sentiment_Analysis_With_Overall_Sentiment.png)
+  >  ![Sentiment_Analysis_With_Overall_Sentiment](screenshots/Sentiment_Analysis_With_Overall_Sentiment.png)
 
 ## Community
 
