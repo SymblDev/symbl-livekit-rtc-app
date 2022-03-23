@@ -27,23 +27,23 @@ Symbl's APIs empower developers to enable:
 - [License](#license)
 
 ## Introduction
-This is a multi-party video-conferencing application that demonstrates [Symbl's Real-time APIs][symbl_streaming_api_docs].
+This is a multi-party video-conferencing application that demonstrates [Symbl's Real-time APIs][symbl_streaming_api_docs]. This application is inspired by [LiveKit's video app][livekit_example_react_app] and is built using [LiveKit's React SDK][livekit_react_sdk] and [Create React App][create_react_app_link].
 
 ## Features
+This extension provides the following out-of-the-box conversational intelligence features:
 
-- Live Closed Captioning
-- [Real-time Transcription](## "Real-time Transcription with different color coding scheme for Senders and Receivers")
-- [Real-time Insights: Questions, Action Items and Follow-ups](## "Real-time Insights with different color coding scheme for Senders and Receivers")
-- Real-time Topics with sentiments
-- Real-time Trackers detection
-- [Real-time Sentiment Analysis of the conversations](## "Real-time sentiment analysis (sentence level) and aggregated/overall sentiment categorisation of the conversations. This is demonstrated using a linear graph.")
-- [Real-time Meeting metrics](## "Pie Chart to demonstrate the total_talktime, total_silence and total_overlapping_time")
-- [Real-time Member metrics](## "Demonstrates the talktime/contribution of a member in the conversations")
-- Video conferencing with real-time video and audio
-- Enable/Disable camera
-- Mute/unmute mic
-- Screen sharing
-
+- **Live Closed Captioning**: Live closed captioning is enabled by default and provides a real-time transcription of your audio content.
+- **Real-time Transcription**: Symbl offers state-of-the-art Speech-to-Text capability (also called transcription). You can get audio and video conversations transcriptions in real-time.
+- **Real-time Insights**:
+- **Real-time Topics with sentiments**
+- **Real-time Trackers detection**
+- **Real-time Sentiment Analysis of the conversations**: Real-time sentiment analysis (sentence level) and aggregated/overall sentiment categorisation of the conversations. This is demonstrated using a linear graph.
+- **Real-time Meeting metrics**: Pie Chart to demonstrate the total_talktime, total_silence and total_overlapping_time
+- **Real-time Member metrics**: Demonstrates the talktime/contribution of a member in the conversations
+- **Video conferencing with real-time video and audio**: This allows you to use this for real-time use cases where both the video, audio, and its results from Symbl's back-end need to be available in real-time. It can be integrated directly via the browser or server.
+- **Enable/Disable camera**: After connecting your camera you can enable or disable the camera when you want.
+- **Mute/unmute mic**: After you connect to your device's microphone you can mute or unmute when you want.
+- **Screen sharing**: This can be used to capture the screen directly from the web app.
 ## Pre-requisites
 
 - [Node JS (version 14+)](node_js_download_link)
@@ -109,7 +109,7 @@ The application will be started at [http://localhost:3000](http://localhost:3000
 
 2. Enter the LiveKit URL
 > If the LiveKit server is not running at the localhost, we can utilize the LiveKit's playground server URL.
-> ```http request
+> ```text
 >    wss://demo.livekit.cloud
 > ```
 
@@ -168,3 +168,6 @@ This library is released under the [MIT][license]
 [pulls]: https://github.com/symblai/symbl-livekit-rtc-app/pulls
 [node_js_download_link]: https://nodejs.org/en/download/
 [symbl_signup]: https://platform.symbl.ai/#/signup?utm_source=get-info&utm_medium=marcelo&utm_campaign=rep
+[livekit_example_react_app]: https://github.com/livekit/livekit-react/tree/master/example
+[livekit_react_sdk]: https://github.com/livekit/livekit-react
+[create_react_app_link]: https://github.com/facebook/create-react-app
