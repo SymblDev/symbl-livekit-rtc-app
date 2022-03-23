@@ -130,7 +130,13 @@ The application will be started at [http://localhost:3000](http://localhost:3000
 
 5. Closed Captioning will appear on the screen as soon as a person start speaking.
 
-6. To view the Symbl Results (Transcripts, Insights, Topics, Trackers), click on the down arrow that appear in bottom right corner as soon as Symbl's intelligence is generated. 
+6. To view the Symbl Results (Transcripts, Insights, Topics, Trackers), click on the down arrow that appear in bottom right corner as soon as Symbl's intelligence is generated.
+
+    > ### Adding Multiple Participants in a Room
+    >
+    > If you want to see how the application behaves with multiple participants, you can simply open `localhost:3000` in multiple tabs in your browser and connect to the same room using different user names.
+    >
+    >Additionally, if you would like to invite other participants to a room, each participant would need to have their own installation of this application and use the same room name and Account SID (the API Key and Secret can be different).
 
 ## Screenshots
 
