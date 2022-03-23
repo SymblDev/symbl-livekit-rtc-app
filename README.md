@@ -34,12 +34,12 @@ This extension provides the following out-of-the-box conversational intelligence
 
 - **Live Closed Captioning**: Live closed captioning is enabled by default and provides a real-time transcription of your audio content.
 - **Real-time Transcription**: Symbl offers state-of-the-art Speech-to-Text capability (also called transcription). You can get audio and video conversations transcriptions in real-time.
-- **Real-time Insights**:
-- **Real-time Topics with sentiments**
-- **Real-time Trackers detection**
-- **Real-time Sentiment Analysis of the conversations**: Real-time sentiment analysis (sentence level) and aggregated/overall sentiment categorisation of the conversations. This is demonstrated using a linear graph.
-- **Real-time Meeting metrics**: Pie Chart to demonstrate the total_talktime, total_silence and total_overlapping_time
-- **Real-time Member metrics**: Demonstrates the talktime/contribution of a member in the conversations
+- **Real-time Insights**: Symbl allows you to get the real-time insights (action items, questions and follow ups) of the conversations.
+- **Real-time Topics with sentiments**: Symbl allows you to get the real-time topics of the conversations along with their sentiments.
+- **Real-time Trackers detection**: Symbl allows real-time detection of the trackers in the conversation. 
+- **Real-time Sentiment Analysis of the conversations**: Symbl allows you to get real-time sentiment analysis (sentence level) and aggregated/overall sentiment categorisation of the conversations.
+- **Real-time Meeting metrics**: Symbl allows you to get real-time analytics of `total talktime`, `total silence` and `total overlapping time` of the meeting.
+- **Real-time Member metrics**: Demonstrates the `talktime` or contribution of a member in the conversations.
 - **Video conferencing with real-time video and audio**: This allows you to use this for real-time use cases where both the video, audio, and its results from Symbl's back-end need to be available in real-time. It can be integrated directly via the browser or server.
 - **Enable/Disable camera**: After connecting your camera you can enable or disable the camera when you want.
 - **Mute/unmute mic**: After you connect to your device's microphone you can mute or unmute when you want.
