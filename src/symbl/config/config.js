@@ -14,14 +14,13 @@ const config = {
     realtimeAnalyticsMetric: true,
     trackers: [
         {
-            name: 'Enable All Trackers',
+            name: "Promotion Mention",
             vocabulary: [
-                "be careful",
-                "bankers expected hiring",
-                "discussion",
-                "separate system",
-                "old shop"
-            ],
+                "We have a special promotion going on if you book this before",
+                "I can offer you a discount of 10 20 percent you being a new customer for us",
+                "We have our month special this month",
+                "We have a sale right now on"
+            ]
         }
     ],
 }
