@@ -131,6 +131,7 @@ The application will be started at [http://localhost:3000](http://localhost:3000
 5. Closed Captioning will appear on the screen as soon as a person start speaking.
 
 6. To view the Symbl Results (Transcripts, Insights, Topics, Trackers), click on the down arrow that appear in bottom right corner as soon as Symbl's intelligence is generated.
+<br><br>
 
     > ### Adding Multiple Participants in a Room
     >
