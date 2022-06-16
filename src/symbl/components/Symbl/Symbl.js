@@ -2,6 +2,7 @@ import React, {useRef} from "react";
 import './styles.css'
 import AnalyticsChart from "../Analytics/AnalyticsChart/AnalyticsChart";
 import MembersAnalytics from "../Analytics/MembersAnalytics/MembersAnalytics";
+import MembersPaceAnalytics from "../Analytics/MembersPaceAnalytics/MembersPaceAnalytics";
 import SentimentAnalytics from "../Analytics/SentimentAnalytics/SentimentAnalytics";
 import SymblResults from "../SymblResults/SymblResults";
 import ClosedCaptions from "../ClosedCaptions/ClosedCaptions";
@@ -66,6 +67,8 @@ const Symbl = ({
                                         <AnalyticsChart metrics={analyticsMetric.metrics}/>
                                         <MembersAnalytics members={analyticsMetric.members}/>
                                     </div>
+
+                                    <MembersPaceAnalytics members={analyticsMetric.members}/>
                                 </div> : null
                             }
                         </div>
