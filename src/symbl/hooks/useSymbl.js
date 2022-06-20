@@ -137,7 +137,7 @@ export const useSymbl = ({meetingId, meetingName, participantId, participantName
                 })
             });
 
-            setTrackers(trackers.flat(2));
+            setTrackers(prev => [...prev, ...trackers.flat(2)]);
         },
 
         onMessageSentimentsUpdated: (messages) => {
