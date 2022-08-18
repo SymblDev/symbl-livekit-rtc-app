@@ -35,7 +35,7 @@ const Symbl = ({
     return (
         <>
             <ClosedCaptions closedCaption={closedCaption}/>
-            {transcripts.length > 0 || insights.length > 0 || topics.length > 0 ?
+            {transcripts.length > 0 || insights.length > 0 || topics.length > 0 || messagesWithSentiment.length > 0 ?
                 <>
                     <ScrollDownArrow onClick={scrollDownToSymblContainer}/>
                     <div className="symbl-container" ref={symblContainerRef}>

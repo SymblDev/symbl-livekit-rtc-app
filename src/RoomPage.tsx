@@ -8,7 +8,11 @@ import {useLocation, useNavigate} from 'react-router-dom'
 import {useSymbl} from './symbl/hooks/useSymbl'
 import Symbl from "./symbl/components/Symbl/Symbl";
 
-export const RoomPage = () => {
+interface RoomPageProps {
+  customVocabulary: Array<string>
+}
+
+export const RoomPage = ({customVocabulary}: RoomPageProps) => {
   const [numParticipants, setNumParticipants] = useState(0)
   const [displayOptions, setDisplayOptions] = useState<DisplayOptions>({
     stageLayout: 'grid',
@@ -107,7 +111,7 @@ export const RoomPage = () => {
               token={token}
               onConnected={room => {
                 onConnected(room, query);
-                getSymblConfig(room).then(config => setSymblConfig(config));
+                getSymblConfig(room).then(config => setSymblConfig({...config, customVocabulary: customVocabulary}));
                 room.on(RoomEvent.ParticipantConnected, () => updateParticipantSize(room))
                 room.on(RoomEvent.ParticipantDisconnected, () => onParticipantDisconnected(room))
                 room.localParticipant.on(ParticipantEvent.TrackMuted, muteSymbl);

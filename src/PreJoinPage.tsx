@@ -1,25 +1,37 @@
-import {faBolt} from '@fortawesome/free-solid-svg-icons'
+import {faBolt, faCommentDots, faPlus} from '@fortawesome/free-solid-svg-icons'
 import {createLocalVideoTrack, LocalVideoTrack} from 'livekit-client'
 import {AudioSelectButton, ControlButton, VideoRenderer, VideoSelectButton} from 'livekit-react'
-import React, {ReactElement, useEffect, useState} from "react"
+import { config } from 'process'
+import React, {ReactElement, useEffect, useState, useRef} from "react"
 import {AspectRatio} from 'react-aspect-ratio'
 import {useNavigate} from 'react-router-dom'
 
-export const PreJoinPage = () => {
+interface PreJoinPageProps {
+    customVocabulary: Array<string>,
+    addVocabPhrase: (phrase: string) => void
+}
+
+export const PreJoinPage = ({customVocabulary, addVocabPhrase}: PreJoinPageProps) => {
     // state to pass onto room
-    const [url, setUrl] = useState('ws://localhost:7880')
+    const [url, setUrl] = useState('wss://demo.livekit.cloud')
     const [token, setToken] = useState<string>('')
     const [simulcast, setSimulcast] = useState(true)
     const [dynacast, setDynacast] = useState(true)
     const [adaptiveStream, setAdaptiveStream] = useState(true)
     const [videoEnabled, setVideoEnabled] = useState(false)
     const [audioEnabled, setAudioEnabled] = useState(true)
+    // state for custom vocabulary
+    const [customVocabularyPopupEnabled, setCustomVocabularyPopupEnabled] = useState(false);
+    const [addVocabBtnDisabled, setAddVocabBtnDisabled] = useState(true);
     // disable connect button unless validated
     const [connectDisabled, setConnectDisabled] = useState(true)
     const [videoTrack, setVideoTrack] = useState<LocalVideoTrack>();
     const [audioDevice, setAudioDevice] = useState<MediaDeviceInfo>();
     const [videoDevice, setVideoDevice] = useState<MediaDeviceInfo>();
     const navigate = useNavigate()
+    const vocabPhraseInputRef = useRef<HTMLInputElement>(null);
+
+    
 
     useEffect(() => {
         if (token && url) {
@@ -110,6 +122,25 @@ export const PreJoinPage = () => {
         })
     }
 
+    const toggleCustomVocabPopup = () => {
+        setCustomVocabularyPopupEnabled(!customVocabularyPopupEnabled);
+    }
+
+    const pushVocabPhrase = () => {
+        if(vocabPhraseInputRef.current &&  vocabPhraseInputRef.current.value) {
+            addVocabPhrase(vocabPhraseInputRef.current.value);
+            vocabPhraseInputRef.current.value = "";
+        }
+    }
+
+    const checkVocabInputValid = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if(vocabPhraseInputRef.current &&  vocabPhraseInputRef.current.value) {
+            setAddVocabBtnDisabled(false);
+        } else {
+            setAddVocabBtnDisabled(true);
+        }
+    }
+
     let videoElement: ReactElement;
     if (videoTrack) {
         videoElement = <VideoRenderer track={videoTrack} isLocal={true}/>;
@@ -176,6 +207,11 @@ export const PreJoinPage = () => {
                             onClick={toggleVideo}
                             onSourceSelected={selectVideoDevice}
                         />
+                        <ControlButton 
+                            label={`${customVocabularyPopupEnabled ? "Close" : "Open"} Vocabularies`}
+                            icon={faCommentDots}
+                            onClick={toggleCustomVocabPopup}
+                        />
                     </div>
                     <div className="right">
                         <ControlButton
@@ -185,6 +221,42 @@ export const PreJoinPage = () => {
                             onClick={connectToRoom}/>
                     </div>
                 </div>
+                {   customVocabularyPopupEnabled &&
+                    <div className="entrySection">
+                        <div>
+                            <div className="label">
+                                Vocabulary Phrase
+                            </div>
+                            <div>
+                                <input type="text" name="vocab" ref={vocabPhraseInputRef} onChange={checkVocabInputValid}/>
+                            </div>
+                            <div>
+                                <ControlButton 
+                                    label='Add Phrase'
+                                    disabled={addVocabBtnDisabled}
+                                    icon={faPlus}
+                                    onClick={pushVocabPhrase}
+                                />
+                            </div>
+                        </div>
+                        <div>
+                            <div className='label'>
+                                Custom Vocabulary Phrases
+                            </div>
+                            <div>
+                                <ul>
+                                    {
+                                        customVocabulary.map((vocab, index) =>
+                                            <li key={index}>
+                                                {vocab}
+                                            </li>
+                                        )
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                }
             </main>
             <footer>
                 This page is built with <a href="https://github.com/livekit/livekit-react">LiveKit React</a>&nbsp;

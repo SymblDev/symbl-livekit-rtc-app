@@ -10,6 +10,7 @@ export const Topic = ({topic}) => {
             case "negative":
                 return <span style={{fontSize: '20px'}}>&#x1F61F;</span>;
             case "neutral":
+            default:
                 return <span style={{fontSize: '20px'}}>&#x1F60C;</span>;
         }
     }

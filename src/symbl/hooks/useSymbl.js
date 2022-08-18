@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from "react";
 import SymblService from "../services/SymblService";
 import config from "../config/config";
+import { getConfigFileParsingDiagnostics } from "typescript";
 
-export const useSymbl = ({meetingId, meetingName, participantId, participantName, stream}) => {
+export const useSymbl = ({meetingId, meetingName, participantId, participantName, stream, customVocabulary}) => {
 
     const [closedCaption, setClosedCaption] = useState({});
     const [transcripts, setTranscripts] = useState([]);
@@ -34,6 +35,7 @@ export const useSymbl = ({meetingId, meetingName, participantId, participantName
         }
 
         if (isEmptyObject(symblService)) {
+            config.customVocabulary = [...config.customVocabulary, ...customVocabulary];
             const service = new SymblService(config, meetingId, meetingName, participantId, participantName, handlers, stream);
             setSymblService(service);
             return;
@@ -79,6 +81,20 @@ export const useSymbl = ({meetingId, meetingName, participantId, participantName
     }
 
     const handlers = {
+        onMessageResponse: (messages) => {
+            console.log('MESSAGES RECEIVED:', messages);
+            messages.forEach(message => {
+                const caption = {
+                    text: message.payload.content,
+                    userId: message.from.id,
+                    userName: message.from.name,
+                    isSender: message.from.userId === participantId && message.from.name === participantName,
+                    timestamp: getCurrentTimestamp()
+                };
+                setTranscripts(prev => [...prev, caption]);
+            });
+        },
+
         onSpeechDetected: (data) => {
             const caption = {
                 text: data.punctuated.transcript,
@@ -90,9 +106,11 @@ export const useSymbl = ({meetingId, meetingName, participantId, participantName
             }
             setClosedCaption(caption);
 
-            if (data.isFinal) {
-                setTranscripts(prev => [...prev, caption]);
-            }
+            // TODO - Remove
+            // Not needed, will process trascripts with messages so Redaction is used
+            // if (data.isFinal) {
+            //     setTranscripts(prev => [...prev, caption]);
+            // }
         },
 
         onInsightResponse: (data) => {
