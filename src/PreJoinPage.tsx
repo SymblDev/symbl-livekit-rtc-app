@@ -5,13 +5,14 @@ import { config } from 'process'
 import React, {ReactElement, useEffect, useState, useRef} from "react"
 import {AspectRatio} from 'react-aspect-ratio'
 import {useNavigate} from 'react-router-dom'
+import {VocabOperations, Vocabularies} from './Types'
 
 interface PreJoinPageProps {
-    customVocabulary: Array<string>,
-    addVocabPhrase: (phrase: string) => void
+    customVocabulary: Vocabularies,
+    vocabOperations: VocabOperations
 }
 
-export const PreJoinPage = ({customVocabulary, addVocabPhrase}: PreJoinPageProps) => {
+export const PreJoinPage = ({customVocabulary, vocabOperations}: PreJoinPageProps) => {
     // state to pass onto room
     const [url, setUrl] = useState('wss://demo.livekit.cloud')
     const [token, setToken] = useState<string>('')
@@ -23,6 +24,7 @@ export const PreJoinPage = ({customVocabulary, addVocabPhrase}: PreJoinPageProps
     // state for custom vocabulary
     const [customVocabularyPopupEnabled, setCustomVocabularyPopupEnabled] = useState(false);
     const [addVocabBtnDisabled, setAddVocabBtnDisabled] = useState(true);
+    const [addVocabStrengthBtnDisabled, setAddVocabStrengthBtnDisabled] = useState(true);
     // disable connect button unless validated
     const [connectDisabled, setConnectDisabled] = useState(true)
     const [videoTrack, setVideoTrack] = useState<LocalVideoTrack>();
@@ -30,6 +32,7 @@ export const PreJoinPage = ({customVocabulary, addVocabPhrase}: PreJoinPageProps
     const [videoDevice, setVideoDevice] = useState<MediaDeviceInfo>();
     const navigate = useNavigate()
     const vocabPhraseInputRef = useRef<HTMLInputElement>(null);
+    const vocabStrengthPhraseInputRef = useRef<HTMLInputElement>(null);
 
     
 
@@ -128,7 +131,7 @@ export const PreJoinPage = ({customVocabulary, addVocabPhrase}: PreJoinPageProps
 
     const pushVocabPhrase = () => {
         if(vocabPhraseInputRef.current &&  vocabPhraseInputRef.current.value) {
-            addVocabPhrase(vocabPhraseInputRef.current.value);
+            vocabOperations.addVocabularyPhrase(vocabPhraseInputRef.current.value);
             vocabPhraseInputRef.current.value = "";
         }
     }
@@ -138,6 +141,21 @@ export const PreJoinPage = ({customVocabulary, addVocabPhrase}: PreJoinPageProps
             setAddVocabBtnDisabled(false);
         } else {
             setAddVocabBtnDisabled(true);
+        }
+    }
+
+    const pushVocabStrengthPhrase = () => {
+        if(vocabStrengthPhraseInputRef.current &&  vocabStrengthPhraseInputRef.current.value) {
+            vocabOperations.addVocabularyStrengthPhrase(vocabStrengthPhraseInputRef.current.value);
+            vocabStrengthPhraseInputRef.current.value = "";
+        }
+    }
+
+    const checkVocabStrengthInputValid = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if(vocabStrengthPhraseInputRef.current &&  vocabStrengthPhraseInputRef.current.value) {
+            setAddVocabStrengthBtnDisabled(false);
+        } else {
+            setAddVocabStrengthBtnDisabled(true);
         }
     }
 
@@ -240,13 +258,29 @@ export const PreJoinPage = ({customVocabulary, addVocabPhrase}: PreJoinPageProps
                             </div>
                         </div>
                         <div>
+                            <div className="label">
+                                Vocabulary Strength Phrase
+                            </div>
+                            <div>
+                                <input type="text" name="vocab" ref={vocabStrengthPhraseInputRef} onChange={checkVocabStrengthInputValid}/>
+                            </div>
+                            <div>
+                                <ControlButton 
+                                    label='Add Phrase'
+                                    disabled={addVocabStrengthBtnDisabled}
+                                    icon={faPlus}
+                                    onClick={pushVocabStrengthPhrase}
+                                />
+                            </div>
+                        </div>
+                        <div>
                             <div className='label'>
                                 Custom Vocabulary Phrases
                             </div>
                             <div>
                                 <ul>
                                     {
-                                        customVocabulary.map((vocab, index) =>
+                                        customVocabulary.vocabulary.map((vocab, index) =>
                                             <li key={index}>
                                                 {vocab}
                                             </li>
@@ -255,7 +289,24 @@ export const PreJoinPage = ({customVocabulary, addVocabPhrase}: PreJoinPageProps
                                 </ul>
                             </div>
                         </div>
+                        <div>
+                            <div className='label'>
+                                Custom Vocabulary Strength Phrases
+                            </div>
+                            <div>
+                                <ul>
+                                    {
+                                        customVocabulary.vocabularyStrength.map((vocab, index) =>
+                                            <li key={index}>
+                                                {vocab.text}
+                                            </li>
+                                        )
+                                    }
+                                </ul>
+                            </div>
+                        </div>
                     </div>
+                    
                 }
             </main>
             <footer>

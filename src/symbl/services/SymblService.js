@@ -138,7 +138,8 @@ export default class SymblService {
                 name: this.localParticipant && this.localParticipant.name
             },
             trackers: this.config.trackers,
-            customVocabulary: this.config.customVocabulary
+            customVocabulary: this.config.customVocabulary,
+            customVocabularyStrength: this.config.customVocabularyStrength
         }));
     }
 

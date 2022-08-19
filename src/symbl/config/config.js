@@ -18,6 +18,7 @@ const config = {
     realtimeSentimentAnalysis: true,
     realtimeAnalyticsMetric: true,
     customVocabulary: ["Symbl", "Symbl.ai"],
+    customVocabularyStrength: [],
     detectEntities: true,
     trackers: [
         {

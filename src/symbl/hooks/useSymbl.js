@@ -35,7 +35,11 @@ export const useSymbl = ({meetingId, meetingName, participantId, participantName
         }
 
         if (isEmptyObject(symblService)) {
-            config.customVocabulary = [...config.customVocabulary, ...customVocabulary];
+            config.customVocabulary = [...config.customVocabulary, ...customVocabulary.vocabulary];
+            config.customVocabularyStrength = [...config.customVocabularyStrength, ...customVocabulary.vocabularyStrength];
+
+            console.log(config.customVocabulary, config.customVocabularyStrength);
+
             const service = new SymblService(config, meetingId, meetingName, participantId, participantName, handlers, stream);
             setSymblService(service);
             return;

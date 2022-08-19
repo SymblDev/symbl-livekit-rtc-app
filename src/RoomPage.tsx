@@ -7,9 +7,10 @@ import "react-aspect-ratio/aspect-ratio.css"
 import {useLocation, useNavigate} from 'react-router-dom'
 import {useSymbl} from './symbl/hooks/useSymbl'
 import Symbl from "./symbl/components/Symbl/Symbl";
+import { Vocabularies } from './Types'
 
 interface RoomPageProps {
-  customVocabulary: Array<string>
+  customVocabulary: Vocabularies
 }
 
 export const RoomPage = ({customVocabulary}: RoomPageProps) => {
