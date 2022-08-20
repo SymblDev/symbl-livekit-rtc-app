@@ -1,11 +1,11 @@
 import {faBolt, faCommentDots, faPlus} from '@fortawesome/free-solid-svg-icons'
 import {createLocalVideoTrack, LocalVideoTrack} from 'livekit-client'
 import {AudioSelectButton, ControlButton, VideoRenderer, VideoSelectButton} from 'livekit-react'
-import { config } from 'process'
 import React, {ReactElement, useEffect, useState, useRef} from "react"
 import {AspectRatio} from 'react-aspect-ratio'
 import {useNavigate} from 'react-router-dom'
 import {VocabOperations, Vocabularies} from './Types'
+import config from './symbl/config/config'
 
 interface PreJoinPageProps {
     customVocabulary: Vocabularies,
@@ -15,7 +15,12 @@ interface PreJoinPageProps {
 export const PreJoinPage = ({customVocabulary, vocabOperations}: PreJoinPageProps) => {
     // state to pass onto room
     const [url, setUrl] = useState('wss://demo.livekit.cloud')
-    const [token, setToken] = useState<string>('')
+    const [token, setToken] = useState<string>(config.liveKitToken)
+
+    //State to generate LiveKit Token
+    const [userName, setUserName] = useState<string>('')
+    const [roomName, setRoomName] = useState<string>('')
+
     const [simulcast, setSimulcast] = useState(true)
     const [dynacast, setDynacast] = useState(true)
     const [adaptiveStream, setAdaptiveStream] = useState(true)
@@ -37,12 +42,12 @@ export const PreJoinPage = ({customVocabulary, vocabOperations}: PreJoinPageProp
     
 
     useEffect(() => {
-        if (token && url) {
+        if (url && token) {
             setConnectDisabled(false)
         } else {
             setConnectDisabled(true)
         }
-    }, [token, url])
+    }, [url, token])
 
     const toggleVideo = async () => {
         if (videoTrack) {
@@ -169,23 +174,23 @@ export const PreJoinPage = ({customVocabulary, vocabOperations}: PreJoinPageProp
     return (
         <div className="prejoin">
             <main>
-                <h2>LiveKit Video</h2>
+                <h2>Symbl Streaming</h2>
                 <hr/>
-                <div className="entrySection">
+                {/* <div className="entrySection">
                     <div>
                         <div className="label">
-                            LiveKit URL
+                            User Name
                         </div>
                         <div>
-                            <input type="text" name="url" value={url} onChange={e => setUrl(e.target.value)}/>
+                            <input type="text" name="url" value={userName} onChange={e => setUserName(e.target.value)}/>
                         </div>
                     </div>
                     <div>
                         <div className="label">
-                            Token
+                            Room Name
                         </div>
                         <div>
-                            <input type="text" name="token" value={token} onChange={e => setToken(e.target.value)}/>
+                            <input type="text" name="token" value={roomName} onChange={e => setRoomName(e.target.value)}/>
                         </div>
                     </div>
                     <div className="options">
@@ -205,7 +210,7 @@ export const PreJoinPage = ({customVocabulary, vocabOperations}: PreJoinPageProp
                             <label htmlFor="adaptivestream-option">Adaptive Stream</label>
                         </div>
                     </div>
-                </div>
+                </div> */}
 
                 <div className="videoSection">
                     <AspectRatio ratio={16 / 9}>

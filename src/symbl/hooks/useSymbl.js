@@ -93,9 +93,12 @@ export const useSymbl = ({meetingId, meetingName, participantId, participantName
                     userId: message.from.id,
                     userName: message.from.name,
                     isSender: message.from.userId === participantId && message.from.name === participantName,
-                    timestamp: getCurrentTimestamp()
+                    timestamp: getCurrentTimestamp(),
+                    timeOffset: message.duration.timeOffset
                 };
-                setTranscripts(prev => [...prev, caption]);
+                setTranscripts(prev => [caption, ...prev].sort((a, b) => {
+                    return a.timeOffset < b.timeOffset;
+                }));
             });
         },
 
