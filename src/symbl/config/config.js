@@ -48,7 +48,8 @@ const config = {
        // Use custom string "[PII_PCI_ENTITY]" to replace PII/PCI information with
        redactionString: "*****" // By default ****
    },
-   liveKitToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2aWRlbyI6eyJyb29tSm9pbiI6dHJ1ZSwicm9vbSI6IlN5bWJsIFRlc3QiLCJjYW5QdWJsaXNoIjp0cnVlLCJjYW5TdWJzY3JpYmUiOnRydWV9LCJpYXQiOjE2NjEwMTM0MDksIm5iZiI6MTY2MTAxMzQwOSwiZXhwIjoxNjYxMDIwNjA5LCJpc3MiOiJBUElreldoYnhCYUdTaXEiLCJzdWIiOiJKYWtlIiwianRpIjoiSmFrZSJ9.QfTqcghI8sQf1nNOgPjrp1_9yP7Bwhv9amOv1YE9mMg'
+   //Copy LiveKit Token Here
+   liveKitToken: ''
 }
 
 module.exports = config;

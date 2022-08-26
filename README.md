@@ -105,17 +105,7 @@ This extension provides the following out-of-the-box conversational intelligence
 The application will be started at [http://localhost:3000](http://localhost:3000)
 
 ## Usage
-1. Navigate to [http://localhost:3000](http://localhost:3000)
-
-2. Enter the LiveKit URL
-    > If the LiveKit server is not running at the localhost, we can utilize the LiveKit's playground server URL.
-    > ```text
-    >    wss://demo.livekit.cloud
-    > ```
-
-3. Enter the `Token` generated using the LivekKit's Server.
-    > If the LiveKit server is not running at the localhost, we can utilize the LiveKit's playground server URL to generate token.
-    > ```
+1. Generate the `Token` using LivekKit's Server.
     >    curl --location --request POST 'https://livekit.io/api/playground/tokens' \
     >    --header 'authority: livekit.io' \
     >    --header 'Content-Type: text/plain;charset=UTF-8' \
@@ -124,6 +114,10 @@ The application will be started at [http://localhost:3000](http://localhost:3000
     >        "userName": "Stark"
     >    }'
     > ```
+  
+2. Copy the token into `config.js` in the `src/symbl/config/` directory and save the file.
+
+3. Navigate to [http://localhost:3000](http://localhost:3000)
 
 4. Click on `Connect` to enter the Room.
 
