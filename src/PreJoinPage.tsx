@@ -1,33 +1,53 @@
-import {faBolt} from '@fortawesome/free-solid-svg-icons'
+import {faBolt, faCommentDots, faPlus} from '@fortawesome/free-solid-svg-icons'
 import {createLocalVideoTrack, LocalVideoTrack} from 'livekit-client'
 import {AudioSelectButton, ControlButton, VideoRenderer, VideoSelectButton} from 'livekit-react'
-import React, {ReactElement, useEffect, useState} from "react"
+import React, {ReactElement, useEffect, useState, useRef} from "react"
 import {AspectRatio} from 'react-aspect-ratio'
 import {useNavigate} from 'react-router-dom'
+import {VocabOperations, Vocabularies} from './Types'
+import config from './symbl/config/config'
 
-export const PreJoinPage = () => {
+interface PreJoinPageProps {
+    customVocabulary: Vocabularies,
+    vocabOperations: VocabOperations
+}
+
+export const PreJoinPage = ({customVocabulary, vocabOperations}: PreJoinPageProps) => {
     // state to pass onto room
-    const [url, setUrl] = useState('ws://localhost:7880')
-    const [token, setToken] = useState<string>('')
+    const [url, setUrl] = useState('wss://demo.livekit.cloud')
+    const [token, setToken] = useState<string>(config.liveKitToken)
+
+    //State to generate LiveKit Token
+    const [userName, setUserName] = useState<string>('')
+    const [roomName, setRoomName] = useState<string>('')
+
     const [simulcast, setSimulcast] = useState(true)
     const [dynacast, setDynacast] = useState(true)
     const [adaptiveStream, setAdaptiveStream] = useState(true)
     const [videoEnabled, setVideoEnabled] = useState(false)
     const [audioEnabled, setAudioEnabled] = useState(true)
+    // state for custom vocabulary
+    const [customVocabularyPopupEnabled, setCustomVocabularyPopupEnabled] = useState(false);
+    const [addVocabBtnDisabled, setAddVocabBtnDisabled] = useState(true);
+    const [addVocabStrengthBtnDisabled, setAddVocabStrengthBtnDisabled] = useState(true);
     // disable connect button unless validated
     const [connectDisabled, setConnectDisabled] = useState(true)
     const [videoTrack, setVideoTrack] = useState<LocalVideoTrack>();
     const [audioDevice, setAudioDevice] = useState<MediaDeviceInfo>();
     const [videoDevice, setVideoDevice] = useState<MediaDeviceInfo>();
     const navigate = useNavigate()
+    const vocabPhraseInputRef = useRef<HTMLInputElement>(null);
+    const vocabStrengthPhraseInputRef = useRef<HTMLInputElement>(null);
+
+    
 
     useEffect(() => {
-        if (token && url) {
+        if (url && token) {
             setConnectDisabled(false)
         } else {
             setConnectDisabled(true)
         }
-    }, [token, url])
+    }, [url, token])
 
     const toggleVideo = async () => {
         if (videoTrack) {
@@ -110,6 +130,40 @@ export const PreJoinPage = () => {
         })
     }
 
+    const toggleCustomVocabPopup = () => {
+        setCustomVocabularyPopupEnabled(!customVocabularyPopupEnabled);
+    }
+
+    const pushVocabPhrase = () => {
+        if(vocabPhraseInputRef.current &&  vocabPhraseInputRef.current.value) {
+            vocabOperations.addVocabularyPhrase(vocabPhraseInputRef.current.value);
+            vocabPhraseInputRef.current.value = "";
+        }
+    }
+
+    const checkVocabInputValid = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if(vocabPhraseInputRef.current &&  vocabPhraseInputRef.current.value) {
+            setAddVocabBtnDisabled(false);
+        } else {
+            setAddVocabBtnDisabled(true);
+        }
+    }
+
+    const pushVocabStrengthPhrase = () => {
+        if(vocabStrengthPhraseInputRef.current &&  vocabStrengthPhraseInputRef.current.value) {
+            vocabOperations.addVocabularyStrengthPhrase(vocabStrengthPhraseInputRef.current.value);
+            vocabStrengthPhraseInputRef.current.value = "";
+        }
+    }
+
+    const checkVocabStrengthInputValid = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if(vocabStrengthPhraseInputRef.current &&  vocabStrengthPhraseInputRef.current.value) {
+            setAddVocabStrengthBtnDisabled(false);
+        } else {
+            setAddVocabStrengthBtnDisabled(true);
+        }
+    }
+
     let videoElement: ReactElement;
     if (videoTrack) {
         videoElement = <VideoRenderer track={videoTrack} isLocal={true}/>;
@@ -120,23 +174,23 @@ export const PreJoinPage = () => {
     return (
         <div className="prejoin">
             <main>
-                <h2>LiveKit Video</h2>
+                <h2>Symbl Streaming</h2>
                 <hr/>
-                <div className="entrySection">
+                {/* <div className="entrySection">
                     <div>
                         <div className="label">
-                            LiveKit URL
+                            User Name
                         </div>
                         <div>
-                            <input type="text" name="url" value={url} onChange={e => setUrl(e.target.value)}/>
+                            <input type="text" name="url" value={userName} onChange={e => setUserName(e.target.value)}/>
                         </div>
                     </div>
                     <div>
                         <div className="label">
-                            Token
+                            Room Name
                         </div>
                         <div>
-                            <input type="text" name="token" value={token} onChange={e => setToken(e.target.value)}/>
+                            <input type="text" name="token" value={roomName} onChange={e => setRoomName(e.target.value)}/>
                         </div>
                     </div>
                     <div className="options">
@@ -156,7 +210,7 @@ export const PreJoinPage = () => {
                             <label htmlFor="adaptivestream-option">Adaptive Stream</label>
                         </div>
                     </div>
-                </div>
+                </div> */}
 
                 <div className="videoSection">
                     <AspectRatio ratio={16 / 9}>
@@ -176,6 +230,11 @@ export const PreJoinPage = () => {
                             onClick={toggleVideo}
                             onSourceSelected={selectVideoDevice}
                         />
+                        <ControlButton 
+                            label={`${customVocabularyPopupEnabled ? "Close" : "Open"} Vocabularies`}
+                            icon={faCommentDots}
+                            onClick={toggleCustomVocabPopup}
+                        />
                     </div>
                     <div className="right">
                         <ControlButton
@@ -185,6 +244,75 @@ export const PreJoinPage = () => {
                             onClick={connectToRoom}/>
                     </div>
                 </div>
+                {   customVocabularyPopupEnabled &&
+                    <div className="entrySection">
+                        <div>
+                            <div className="label">
+                                Vocabulary Phrase
+                            </div>
+                            <div>
+                                <input type="text" name="vocab" ref={vocabPhraseInputRef} onChange={checkVocabInputValid}/>
+                            </div>
+                            <div>
+                                <ControlButton 
+                                    label='Add Phrase'
+                                    disabled={addVocabBtnDisabled}
+                                    icon={faPlus}
+                                    onClick={pushVocabPhrase}
+                                />
+                            </div>
+                        </div>
+                        <div>
+                            <div className="label">
+                                Vocabulary Strength Phrase
+                            </div>
+                            <div>
+                                <input type="text" name="vocab" ref={vocabStrengthPhraseInputRef} onChange={checkVocabStrengthInputValid}/>
+                            </div>
+                            <div>
+                                <ControlButton 
+                                    label='Add Phrase'
+                                    disabled={addVocabStrengthBtnDisabled}
+                                    icon={faPlus}
+                                    onClick={pushVocabStrengthPhrase}
+                                />
+                            </div>
+                        </div>
+                        <div>
+                            <div className='label'>
+                                Custom Vocabulary Phrases
+                            </div>
+                            <div>
+                                <ul>
+                                    {
+                                        customVocabulary.vocabulary.map((vocab, index) =>
+                                            <li key={index}>
+                                                {vocab}
+                                            </li>
+                                        )
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                        <div>
+                            <div className='label'>
+                                Custom Vocabulary Strength Phrases
+                            </div>
+                            <div>
+                                <ul>
+                                    {
+                                        customVocabulary.vocabularyStrength.map((vocab, index) =>
+                                            <li key={index}>
+                                                {vocab.text}
+                                            </li>
+                                        )
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                }
             </main>
             <footer>
                 This page is built with <a href="https://github.com/livekit/livekit-react">LiveKit React</a>&nbsp;

@@ -127,14 +127,19 @@ export default class SymblService {
                     languageCode: this.config.languageCode,
                     sampleRateHertz: this.audioContext.sampleRate,
                     mode: this.config.mode || 'multi-speaker',
-                    enableAutomaticPunctuation: true
-                }
+                    enableAutomaticPunctuation: true,
+                },
+                detectEntities: this.config.detectEntities,
+                //Symbl Labs PCI/PII Redaction
+                redaction: this.config.redaction,
             },
             speaker: {
                 userId: this.localParticipant && this.localParticipant.id,
                 name: this.localParticipant && this.localParticipant.name
             },
-            trackers: this.config.trackers
+            trackers: this.config.trackers,
+            customVocabulary: this.config.customVocabulary,
+            customVocabularyStrength: this.config.customVocabularyStrength
         }));
     }
 
@@ -154,7 +159,7 @@ export default class SymblService {
                 return;
             }
 
-            this.webSocket = new WebSocket(`${this.config.wssBasePath}/v1/realtime/insights/${this.meetingId}?access_token=${this.accessToken}`);
+            this.webSocket = new WebSocket(`${this.config.wssBasePath}/v1/streaming/${this.meetingId}?access_token=${this.accessToken}`);
 
             this.webSocket.onclose = this.onEnd.bind(this);
             this.webSocket.onerror = this.onError.bind(this);
